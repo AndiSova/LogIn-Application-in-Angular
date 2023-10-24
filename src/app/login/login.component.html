@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+</head>
+<body>
+    <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email">
+          <div *ngIf="logInForm?.get('email')?.hasError('required')">Email is required</div>
+          <div *ngIf="logInForm?.get('email')?.hasError('email')">Invalid email</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" formControlName="password" />
+          <div *ngIf="logInForm?.get('password')?.hasError('required')">Password is required</div>
+          <div *ngIf="logInForm?.get('password')?.hasError('minlength')">Password is too short</div>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        <button type="submit">LogIn</button>
+        <button type="button" (click)="goToRegister()">Register</button>
+      </form>
+</body>
+</html>
